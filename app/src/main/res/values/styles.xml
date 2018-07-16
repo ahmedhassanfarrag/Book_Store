@@ -1,0 +1,74 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- Style for a category in the editor -->
+    <style name="CategoryStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+
+    <!-- Style for an EditText field in the editor -->
+    <style name="EditorFieldStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+    <!-- Style for the measurement units for an EditText field in the editor -->
+    <style name="EditorUnitsStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+    <!-- Theme of the editor -->
+    <style name="required_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/horizontal_margin</item>
+        <item name="android:textColor">@color/required_label_text_color</item>
+    </style>
+    <style name="edit_view_label">
+        <item name="android:layout_width">@dimen/edit_view_label_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="edit_view_value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/horizontal_margin</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:ems">5</item>
+        <item name="android:textSize">@dimen/detail_view_value_txt_size</item>
+    </style>
+    <style name="info_label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/detail_view_label_height</item>
+    </style>
+    <style name="info_value">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/detail_view_value_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/detail_view_value_txt_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawableBottom">@drawable/info_divider</item>
+        <item name="android:layout_marginLeft">@dimen/vertical_margin</item>
+    </style>
+
+
+</resources>

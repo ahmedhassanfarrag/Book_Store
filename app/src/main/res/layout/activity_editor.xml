@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_margin"
+    tools:context=".EditorActivity">
+    <!-- Book Name category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_margin"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/photo_width"
+            android:layout_height="@dimen/photo_height">
+
+            <ImageView
+                android:id="@+id/book_edit_photo"
+                android:layout_width="@dimen/photo_width"
+                android:layout_height="@dimen/photo_height"
+                android:layout_gravity="center"
+                android:background="@drawable/transparent_with_edge_bg"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/add_photo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/add_Image"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/book_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:ems="10"
+                android:hint="@string/title" />
+
+            <TextView
+                android:id="@+id/name_required_label"
+                style="@style/required_view"
+                tools:text="@string/name_required" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/book_item_btn_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/book_detail_price_label"
+            style="@style/edit_view_label"
+            android:text="@string/price" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp">
+
+            <!-- Weight field -->
+            <EditText
+                android:id="@+id/edit_book_price"
+                style="@style/EditorFieldStyle"
+                android:inputType="number" />
+
+            <!-- Units for weight (kg) -->
+            <TextView
+                android:id="@+id/label_weight_units"
+                style="@style/EditorUnitsStyle"
+                android:text="@string/price_unit" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/price_required_label"
+        style="@style/required_view"
+        tools:text="@string/price_required" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/book_item_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/book_detail_quantity_label"
+            style="@style/edit_view_label"
+            android:text="@string/quantity" />
+
+        <Button
+            android:id="@+id/book_edit_minus_btn"
+            android:layout_width="@dimen/book_item_btn_width"
+            android:layout_height="@dimen/book_item_btn_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:background="@drawable/mins" />
+
+        <EditText
+            android:id="@+id/book_edit_quantity"
+            android:layout_width="@dimen/book_item_btn_width"
+            android:layout_height="@dimen/book_item_btn_height"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/transparent_with_edge_bg"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="@string/quantity_default_value" />
+
+        <Button
+            android:id="@+id/book_edit_plus_btn"
+            android:layout_width="@dimen/book_item_btn_width"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/plus" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/quantity_required_label"
+        style="@style/required_view"
+        tools:text="@string/quantity_required" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/book_item_btn_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/book_detail_supplier_label"
+            style="@style/edit_view_label"
+            android:text="@string/supplier" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/book_edit_supplier"
+            style="@style/edit_view_value"
+            android:inputType="textCapWords" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/supplier_required_label"
+        style="@style/required_view"
+        tools:text="@string/supplier_required" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/book_item_btn_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/book_detail_supplier_phone_label"
+            style="@style/edit_view_label"
+            android:text="@string/Product_phone_number" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/book_edit_supplier_phone"
+            style="@style/edit_view_value"
+            android:ems="8"
+            android:inputType="phone"
+            android:maxLength="14" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/phone_required_label"
+        style="@style/required_view"
+        tools:text="@string/phone_required" />
+
+</LinearLayout>

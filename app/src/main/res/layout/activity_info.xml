@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/horizontal_margin"
+    android:layout_marginRight="@dimen/horizontal_margin"
+    android:orientation="vertical"
+    tools:context=".InfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginBottom="@dimen/vertical_margin">
+
+        <ImageView
+            android:id="@+id/book_detail_photo"
+            android:layout_width="@dimen/photo_width"
+            android:layout_height="@dimen/photo_height"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:background="@drawable/transparent_with_edge_bg"/>
+
+        <TextView
+            android:id="@+id/book_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="Book Title"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:textSize="@dimen/detail_view_value_txt_size"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/book_detail_price_label"
+        style="@style/info_label"
+        android:text="@string/price" />
+    <TextView
+        android:id="@+id/book_detail_price"
+        style="@style/info_value"
+        tools:text="10.00" />
+    <TextView
+        android:id="@+id/book_detail_quantity_label"
+        style="@style/info_label"
+        android:text="@string/quantity" />
+
+    <TextView
+        android:id="@+id/book_detail_quantity"
+        style="@style/info_value"
+        tools:text="20" />
+
+    <TextView
+        android:id="@+id/book_detail_supplier_label"
+        style="@style/info_label"
+        android:text="@string/supplier" />
+
+    <TextView
+        android:id="@+id/book_detail_supplier"
+        style="@style/info_value"
+        tools:text="U.S.A" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/book_item_height"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/book_detail_supplier_phone_label"
+                style="@style/info_label"
+                android:text="@string/Product_phone_number" />
+
+            <TextView
+                android:id="@+id/book_detail_supplier_phone"
+                style="@style/info_value"
+                tools:text="0020" />
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/book_detail_phone_btn"
+            android:layout_width="@dimen/book_item_btn_width"
+            android:layout_height="@dimen/book_item_btn_height"
+            android:src="@drawable/phone"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+</LinearLayout>
