@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.android.bookstore.data.BookContract.BookEntry;
 
-public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,BookCursorAdapter.OnSaleBtnClickListener {
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, BookCursorAdapter.OnSaleBtnClickListener {
     private static final int BookLOADER_ID = 0;
     BookCursorAdapter mCursorAdapter;
     private Uri uri = BookEntry.CONTENT_URI;

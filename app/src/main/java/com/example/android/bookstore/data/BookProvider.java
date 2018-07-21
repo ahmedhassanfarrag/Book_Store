@@ -7,7 +7,6 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.android.bookstore.data.BookContract.BookEntry;
@@ -31,6 +30,7 @@ public class BookProvider extends ContentProvider {
      * It's common to use NO_MATCH as the input for this case.
      */
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     // Static initializer. This is run the first time anything is called from this class.
     static {
         // The calls to addURI() go here, for all of the content URI patterns that the provider
@@ -47,6 +47,7 @@ public class BookProvider extends ContentProvider {
         mDbHelper = new BookDbHelper(getContext());
         return true;
     }
+
     /**
      * Perform the query for the given URI. Use the given projection, selection, selection arguments, and sort order.
      */
@@ -99,8 +100,6 @@ public class BookProvider extends ContentProvider {
     }
 
 
-
-
     /**
      * Insert new data into the provider with the given ContentValues.
      */
@@ -114,19 +113,19 @@ public class BookProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
+
     /**
      * Insert a pet into the database with the given content values. Return the new content URI
      * for that specific row in the database.
      */
-    private Uri insertBook(Uri uri, ContentValues values){
+    private Uri insertBook(Uri uri, ContentValues values) {
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         // Insert the new pet with the given values
         long id = database.insert(BookEntry.TABLE_NAME, null, values);
-        if (id == -1){
-            Log.e(LOG_TAG, "Failed to insert row for " + uri);
-        }else{
-            Toast.makeText(getContext(),"Insert successful", Toast.LENGTH_SHORT).show();
+        if (id == -1) {
+        } else {
+            Toast.makeText(getContext(), "Insert successful", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -136,6 +135,7 @@ public class BookProvider extends ContentProvider {
         // return the new URI with the ID appended to the end of it
         return ContentUris.withAppendedId(uri, id);
     }
+
     /**
      * Updates the data at the given selection and selection arguments, with the new ContentValues.
      */
@@ -157,6 +157,7 @@ public class BookProvider extends ContentProvider {
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
+
     /**
      * Update pets in the database with the given content values. Apply the changes to the rows
      * specified in the selection and selection arguments (which could be 0 or 1 or more pets).

@@ -7,5 +7,4 @@
         android:id="@+id/catalog_delete"
         android:title="@string/action_All_delete"
         app:showAsAction="never" />
-
 </menu>

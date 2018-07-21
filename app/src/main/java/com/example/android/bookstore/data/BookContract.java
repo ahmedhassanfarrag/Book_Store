@@ -5,7 +5,8 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 public final class BookContract {
-    private BookContract(){}
+    private BookContract() {
+    }
 
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
@@ -62,6 +63,6 @@ public final class BookContract {
         public static final String COLUMN_Book_Quantity = "Quantity";
         public static final String COLUMN_Book_SupplierName = "SupplierName";
         public static final String COLUMN_Book_SupplierPhone = "SupplierPhone";
-        public static final String TABLE_COLUMN_PHOTO = "book_photo";
+        public static final String COLUMN_Book_PHOTO = "book_photo";
     }
 }

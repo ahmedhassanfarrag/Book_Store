@@ -18,6 +18,7 @@ import java.util.Locale;
 
 public class PhotoUtility {
     public static String mPhotoPath;
+
     private PhotoUtility() {
     }
 
@@ -41,12 +42,10 @@ public class PhotoUtility {
         String imageFileName = "IMG_" + timeStamp;
         File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         if (!storageDir.exists() && !storageDir.mkdirs()) {
-            Log.d(EditorActivity.class.getName(), "failed to create directory");
+            Log.d(EditorActivity.class.getName(), "create directory failed");
         }
         File externalFile = File.createTempFile(imageFileName, ".jpg", storageDir);
-        Log.i(EditorActivity.class.getName(), "the full directory is: " + externalFile);
         mPhotoPath = externalFile.getAbsolutePath();
-        Log.i(CatalogActivity.class.getName(), "the current photo path is: " + mPhotoPath);
         return externalFile;
     }
 
@@ -56,7 +55,6 @@ public class PhotoUtility {
         if (cursor.moveToFirst()) {
             int dataColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             String realPath = cursor.getString(dataColumnIndex);
-            Log.i(PhotoUtility.class.getName(), "THE PATH IS: " + realPath);
             return realPath;
         } else {
             return null;

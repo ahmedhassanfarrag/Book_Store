@@ -14,7 +14,7 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 public class BookCursorAdapter extends CursorAdapter {
 
     public Context context;
-    private OnSaleBtnClickListener saleBtnClickListener;
+    private OnSaleBtnClickListener saleButtonClick;
     private int id;
 
     public interface OnSaleBtnClickListener {
@@ -25,7 +25,7 @@ public class BookCursorAdapter extends CursorAdapter {
         super(context, cursor);
         this.context = context;
         try {
-            saleBtnClickListener = (OnSaleBtnClickListener) context;
+            saleButtonClick = (OnSaleBtnClickListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "implement OnSaleBtnClickListener");
         }
@@ -44,7 +44,7 @@ public class BookCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         TextView nameText = (TextView) view.findViewById(R.id.book_name);
-        TextView priceText= (TextView) view.findViewById(R.id.book_price);
+        TextView priceText = (TextView) view.findViewById(R.id.book_price);
         TextView quantityText = (TextView) view.findViewById(R.id.book_quantity);
         final Button buy = (Button) view.findViewById(R.id.buy_button);
 
@@ -64,7 +64,7 @@ public class BookCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 id = (Integer) buy.getTag();
-                saleBtnClickListener.onSaleBtnClick(id);
+                saleButtonClick.onSaleBtnClick(id);
             }
         });
     }

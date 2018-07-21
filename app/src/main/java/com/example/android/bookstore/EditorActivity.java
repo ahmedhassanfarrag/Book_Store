@@ -32,7 +32,7 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 import java.io.File;
 import java.io.IOException;
 
-public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, View.OnTouchListener {
+public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     /**
      * EditText field to enter the Book's name
      */
@@ -58,7 +58,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      */
     private EditText mSupplierPhoneEditText;
     public ImageView mEditPhotoV;
-    private TextView mNameRequiredV, mPriceRequiredV, mQuantityRequiredV, mSupplierRequiredV, mPhoneRequiredV, mAddPhotoV;
+    private TextView mNameRequiredV,
+            mPriceRequiredV,
+            mQuantityRequiredV,
+            mSupplierRequiredV,
+            mPhoneRequiredV,
+            mAddPhotoV;
     private Button mEditMinusBtn, mEditPlusBtn;
     private String mEditName, mEditSupplier;
     private int mEditQuantity;
@@ -66,10 +71,24 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private static final int LOADER_ID = 1;
     private Uri uriToEdit;
     private Uri uri = BookEntry.CONTENT_URI;
-    private boolean mIsTouched = false;
-    private static final int PHOTO_FROM_ACTION_CODE = 2;
+    /**
+     * Boolean flag that keeps track of whether the Book has been edited (true) or not (false)
+     */
+    private boolean mBookHasChanged = false;
+    private static final int PHOTO_CODE = 2;
     private Uri selectedImageUri;
     private String mPhotoPath;
+
+    // OnTouchListener that listens for any user touches on a View, implying that they are modifying
+    // the view, and we change the mBookHasChanged boolean to true.
+
+    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            mBookHasChanged = true;
+            return false;
+        }
+    };
 
 
     @Override
@@ -85,12 +104,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mAddPhotoV = (TextView) findViewById(R.id.add_photo_tv);
         mEditPhotoV = (ImageView) findViewById(R.id.book_edit_photo);
         //set touch listener for views to check if any change has been made
-        mNameEditText.setOnTouchListener(this);
-        mPriceEditText.setOnTouchListener(this);
-        mQuantityEditText.setOnTouchListener(this);
-        mSupplierNameEditText.setOnTouchListener(this);
-        mSupplierPhoneEditText.setOnTouchListener(this);
-        mEditPhotoV.setOnTouchListener(this);
+        mNameEditText.setOnTouchListener(mTouchListener);
+        mPriceEditText.setOnTouchListener(mTouchListener);
+        mQuantityEditText.setOnTouchListener(mTouchListener);
+        mSupplierNameEditText.setOnTouchListener(mTouchListener);
+        mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
+        mEditPhotoV.setOnTouchListener(mTouchListener);
 
         //image btn click listener to choose or capture photo
         mEditPhotoV.setOnClickListener(imageChooseClickListener);
@@ -104,21 +123,23 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         //btn init and touch listener
         mEditMinusBtn = (Button) findViewById(R.id.book_edit_minus_btn);
         mEditPlusBtn = (Button) findViewById(R.id.book_edit_plus_btn);
-        mEditMinusBtn.setOnTouchListener(this);
-        mEditPlusBtn.setOnTouchListener(this);
+        mEditMinusBtn.setOnTouchListener(mTouchListener);
+        mEditPlusBtn.setOnTouchListener(mTouchListener);
 
 
         Intent intent = getIntent();
         uriToEdit = intent.getData();
         if (uriToEdit == null) {
+            // This is a new Book, so change the app bar to say "Add a Book"
             setTitle(getString(R.string.add_title));
             mAddPhotoV.setVisibility(View.VISIBLE);
 
         } else {
+            // Otherwise this is an existing Book, so change app bar to say "Edit Book"
             setTitle(getString(R.string.edit_title));
             getLoaderManager().initLoader(LOADER_ID, null, this);
         }
-
+        // decrease quantity by (1) when user press minus button.
         mEditMinusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +152,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
             }
         });
-
+        // increase quantity by (1) when user press plus button.
         mEditPlusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,61 +164,56 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
-    //image btn click listener to choose or capture photo
-    private View.OnClickListener imageChooseClickListener = new View.OnClickListener(){
+    //image btn click listener to choose or capture photo.
+    private View.OnClickListener imageChooseClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI);
             Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             File photoFile = null;
-            try{
+            try {
                 photoFile = PhotoUtility.ImageFile(getBaseContext());
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (photoFile!=null){
-                selectedImageUri = FileProvider.getUriForFile(getBaseContext(),"com.example.android.photoProvider",photoFile);
-                takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT,selectedImageUri);
+            if (photoFile != null) {
+                selectedImageUri = FileProvider.getUriForFile(getBaseContext(), "com.example.android.photoProvider", photoFile);
+                takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImageUri);
             }
 
             String title = getString(R.string.image_title);
             Intent chooserIntent = Intent.createChooser(pickIntent, title);
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{takePhotoIntent});
-            startActivityForResult(chooserIntent, PHOTO_FROM_ACTION_CODE);
+            startActivityForResult(chooserIntent, PHOTO_CODE);
         }
     };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PHOTO_FROM_ACTION_CODE) {
-            Bitmap bitmap = null;
+        if (resultCode == RESULT_OK && requestCode == PHOTO_CODE) {
+            Bitmap bit = null;
             if (data == null) {
                 //from camera
                 mPhotoPath = PhotoUtility.mPhotoPath;
-                Log.i(EditorActivity.class.getName(),"now the photo path is: "+mPhotoPath);
-                PhotoUtility.setPic(mPhotoPath,mEditPhotoV);
+                Log.i(EditorActivity.class.getName(), "now the photo path is: " + mPhotoPath);
+                PhotoUtility.setPic(mPhotoPath, mEditPhotoV);
             } else {
                 //from photo or gallery
                 selectedImageUri = data.getData();
                 Log.i(EditorActivity.class.getName(), "selected image uri is:" + selectedImageUri + "iscamera is false");
-                mPhotoPath = PhotoUtility.getPathFromUrl(getBaseContext(),selectedImageUri);
-                Log.i(EditorActivity.class.getName(),"now the photo path is: "+mPhotoPath);
-                PhotoUtility.setPic(mPhotoPath,mEditPhotoV);
+                mPhotoPath = PhotoUtility.getPathFromUrl(getBaseContext(), selectedImageUri);
+                Log.i(EditorActivity.class.getName(), "now the photo path is: " + mPhotoPath);
+                PhotoUtility.setPic(mPhotoPath, mEditPhotoV);
             }
 
         }
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        mIsTouched = true;
-        return false;
-    }
 
     @Override
     public void onBackPressed() {
-        if (mIsTouched) {
+        if (mBookHasChanged) {
             discardConfirmationDialog();
         } else {
             super.onBackPressed();
@@ -254,8 +270,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
+    //Get user input from editor and save  Book into database.
     private void saveBook() {
-
+        // Read from input fields
         mEditName = mNameEditText.getText().toString();
         String price = mPriceEditText.getText().toString();
         String quantity = mQuantityEditText.getText().toString();
@@ -266,6 +283,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (isValuesEmpty) {
             Toast.makeText(this, getString(R.string.data_empty_message), Toast.LENGTH_SHORT).show();
         } else {
+            // Use trim to eliminate leading or trailing white space
             mEditName = mEditName.trim();
             mEditPrice = Double.parseDouble(price.trim());
             mEditQuantity = Integer.parseInt(quantity.trim());
@@ -278,7 +296,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             values.put(BookEntry.COLUMN_Book_SupplierName, mEditSupplier);
             values.put(BookEntry.COLUMN_Book_SupplierPhone, phoneNumber);
             if (mPhotoPath != null) {
-                values.put(BookEntry.TABLE_COLUMN_PHOTO, mPhotoPath);
+                values.put(BookEntry.COLUMN_Book_PHOTO, mPhotoPath);
             }
             if (uriToEdit == null) {
                 getContentResolver().insert(uri, values);
@@ -375,7 +393,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 BookEntry.COLUMN_Book_Quantity,
                 BookEntry.COLUMN_Book_SupplierName,
                 BookEntry.COLUMN_Book_SupplierPhone,
-                BookEntry.TABLE_COLUMN_PHOTO};
+                BookEntry.COLUMN_Book_PHOTO};
         switch (id) {
             case LOADER_ID:
                 return new CursorLoader(this, uriToEdit, projection, null, null, null);
@@ -387,13 +405,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
             if (data.moveToFirst()) {
-
+                // Find the columns of pet attributes that we're interested in
                 int nameColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Name);
                 int priceColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Price);
                 int quantityColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Quantity);
                 int supplierColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_SupplierName);
                 int supplierPhoneColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_SupplierPhone);
-                int photoColumnIndex = data.getColumnIndex(BookEntry.TABLE_COLUMN_PHOTO);
+                int photoColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_PHOTO);
 
                 String photoPath = data.getString(photoColumnIndex);
                 String name = data.getString(nameColumnIndex);
