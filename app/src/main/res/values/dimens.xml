@@ -11,7 +11,6 @@
     <dimen name="vertical_margin">8dp</dimen>
     <dimen name="book_item_btn_width">48dp</dimen>
     <dimen name="book_item_btn_height">48dp</dimen>
-    <dimen name="book_list_name_txt_size"></dimen>
     <dimen name="book_item_vertical_margin">2dp</dimen>
     <dimen name="quantity_tv_bg_size">2dp</dimen>
     <dimen name="quantity_tv_size">20dp</dimen>
@@ -24,5 +23,8 @@
     <dimen name="photo_height">100dp</dimen>
     <dimen name="edit_view_label_width">60dp</dimen>
     <dimen name="photo_padding">2dp</dimen>
-    <string name="name_required">Name Required</string>
+    <dimen name="photo_layout">10dp</dimen>
+    <dimen name="book_plus_btn_width">38dp</dimen>
+    <dimen name="book_mins_btn_height">38dp</dimen>
+    <dimen name="padding_list">5dp</dimen>
 </resources>

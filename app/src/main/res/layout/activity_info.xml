@@ -15,6 +15,17 @@
         android:layout_marginTop="@dimen/vertical_margin"
         android:layout_marginBottom="@dimen/vertical_margin">
 
+
+
+        <TextView
+            android:id="@+id/book_detail_name"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000"
+            tools:text="Book Title"
+            android:layout_marginLeft="@dimen/horizontal_margin"
+            android:textSize="@dimen/detail_view_value_txt_size"/>
         <ImageView
             android:id="@+id/book_detail_photo"
             android:layout_width="@dimen/photo_width"
@@ -22,15 +33,6 @@
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:background="@drawable/transparent_with_edge_bg"/>
-
-        <TextView
-            android:id="@+id/book_detail_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            tools:text="Book Title"
-            android:layout_marginLeft="@dimen/horizontal_margin"
-            android:textSize="@dimen/detail_view_value_txt_size"/>
     </LinearLayout>
     <TextView
         android:id="@+id/book_detail_price_label"
@@ -78,11 +80,12 @@
                 style="@style/info_value"
                 tools:text="0020" />
         </LinearLayout>
+
         <ImageButton
             android:id="@+id/book_detail_phone_btn"
-            android:layout_width="@dimen/book_item_btn_width"
-            android:layout_height="@dimen/book_item_btn_height"
-            android:src="@drawable/phone"
-            android:layout_gravity="center_vertical"/>
+            android:layout_width="@dimen/book_mins_btn_height"
+            android:layout_height="@dimen/book_mins_btn_height"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/call" />
     </LinearLayout>
 </LinearLayout>

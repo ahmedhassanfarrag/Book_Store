@@ -19,7 +19,7 @@
 
     <!-- Label for editor overflow menu option that deletes the current pet [CHAR LIMIT=20] -->
     <string name="action_delete">Delete</string>
-
+    <string name="action_All_delete">Delete All Books</string>
     <string name="empty_view_msg">Click Book button to start adding books.</string>
     <string name="add_Image">Add Image</string>
     <string name="price_required">Price Required</string>
@@ -37,9 +37,18 @@
     <string name="delete_positive_btn">Yes</string>
     <string name="delete_negative_btn">Cancel</string>
     <string name="delete_successful_msg">Book deleted</string>
+    <string name="image_title">Choose Image From</string>
+    <string name="delete_All_successful_msg">All Books deleted</string>
     <string name="delete_unsuccessful_msg">Deletion failed</string>
     <string name="data_empty_message">Please input required spaces</string>
     <string name="delete_message">Do you want to delete this book?</string>
+    <string name="delete_All_message">Do you want to delete All books?</string>
+    <string name="name_required">Name Required</string>
+    <string name="price_list">Price\u0020\u0020:</string>
+    <string name="stock_list">in stock\u0020:</string>
+
+
+
 
 
 
