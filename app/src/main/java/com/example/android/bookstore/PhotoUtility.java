@@ -18,7 +18,6 @@ import java.util.Locale;
 
 public class PhotoUtility {
     public static String mPhotoPath;
-
     private PhotoUtility() {
     }
 

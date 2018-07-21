@@ -76,7 +76,6 @@
     </LinearLayout>
     <Button
         android:id="@+id/buy_button"
-
         android:layout_alignParentRight="true"
         android:layout_width="@dimen/book_mins_btn_height"
         android:layout_height="@dimen/book_mins_btn_height"

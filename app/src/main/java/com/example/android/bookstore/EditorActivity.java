@@ -387,12 +387,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null) {
             if (data.moveToFirst()) {
-                int photoColumnIndex = data.getColumnIndex(BookEntry.TABLE_COLUMN_PHOTO);
+
                 int nameColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Name);
                 int priceColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Price);
                 int quantityColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_Quantity);
                 int supplierColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_SupplierName);
                 int supplierPhoneColumnIndex = data.getColumnIndex(BookEntry.COLUMN_Book_SupplierPhone);
+                int photoColumnIndex = data.getColumnIndex(BookEntry.TABLE_COLUMN_PHOTO);
 
                 String photoPath = data.getString(photoColumnIndex);
                 String name = data.getString(nameColumnIndex);
