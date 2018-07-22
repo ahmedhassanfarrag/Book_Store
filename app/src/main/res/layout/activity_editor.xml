@@ -68,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:textColor="@color/required_label_text_color"
                 android:text="@string/add_Image"
                 android:visibility="gone" />
         </RelativeLayout>

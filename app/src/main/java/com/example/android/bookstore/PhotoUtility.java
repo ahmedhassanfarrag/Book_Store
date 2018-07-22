@@ -30,7 +30,10 @@ public class PhotoUtility {
         BitmapFactory.decodeFile(mPhotoPath, bmOptions);
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
-        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+        int scaleFactor = 1;
+        if ((targetW > 0) || (targetH > 0)) {
+            scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+        }
         bmOptions.inSampleSize = scaleFactor;
         bmOptions.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath, bmOptions);
